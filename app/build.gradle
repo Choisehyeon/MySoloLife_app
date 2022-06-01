@@ -56,5 +56,5 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 
     implementation 'com.google.firebase:firebase-database-ktx'
-
+    implementation 'com.google.firebase:firebase-storage-ktx'
 }

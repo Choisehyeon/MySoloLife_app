@@ -5,6 +5,8 @@
       <map>
         <entry key="app/src/main/res/drawable/border_line.xml" value="0.122" />
         <entry key="app/src/main/res/drawable/border_line_yellow.xml" value="0.1235" />
+        <entry key="app/src/main/res/layout/activity_board_inside.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_board_write.xml" value="0.25104166666666666" />
         <entry key="app/src/main/res/layout/activity_content_show.xml" value="0.11296859169199595" />
         <entry key="app/src/main/res/layout/activity_contents_list.xml" value="0.24791666666666667" />
         <entry key="app/src/main/res/layout/activity_intro.xml" value="0.24583333333333332" />
@@ -12,6 +14,7 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/board_lv_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/contents_rv_item.xml" value="0.24791666666666667" />
         <entry key="app/src/main/res/layout/fragment_bookmark.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.10235507246376811" />
