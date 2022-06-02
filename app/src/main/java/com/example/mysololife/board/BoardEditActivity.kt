@@ -1,17 +1,12 @@
 package com.example.mysololife.board
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.widget.Button
-import android.widget.ImageView
-import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.example.mysololife.R
-import com.example.mysololife.databinding.ActivityBoardInsideBinding
+import com.example.mysololife.databinding.ActivityBoardEditBinding
 import com.example.mysololife.utils.FBAuth
 import com.example.mysololife.utils.FBRef
 import com.google.android.gms.tasks.OnCompleteListener
@@ -22,54 +17,31 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.lang.Exception
 
-class BoardInsideActivity : AppCompatActivity() {
+class BoardEditActivity : AppCompatActivity() {
 
-    private val TAG = BoardInsideActivity::class.java.simpleName
-    private lateinit var binding : ActivityBoardInsideBinding
+    private lateinit var binding : ActivityBoardEditBinding
+    private lateinit var writerUid : String
 
-    private lateinit var key : String
+    private val TAG = BoardEditActivity::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_board_inside)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_board_edit)
 
-        //첫번째 방법
-       /* val title = intent.getStringExtra("title")
-        val content = intent.getStringExtra("content")
-        val time = intent.getStringExtra("time")
-
-        binding.titleArea.text = title
-        binding.timeArea.text = time
-        binding.contentArea.text = content*/
-
-        //두번째 방법
-        key = intent.getStringExtra("key").toString()
+        val key = intent.getStringExtra("key").toString()
         getBoardData(key)
         getImageData(key)
 
-        binding.boardSettingIcon.setOnClickListener {
-            showDialog()
+        binding.editBtn.setOnClickListener {
+            editBoardData(key)
         }
     }
-    private fun showDialog() {
 
-        val mDialogView = LayoutInflater.from(this).inflate(R.layout.custom_dialog, null)
-        val mBuilder = AlertDialog.Builder(this)
-            .setView(mDialogView)
-            .setTitle("게시글 수정/삭제")
-
-        val alertDialog = mBuilder.show()
-        alertDialog.findViewById<Button>(R.id.updateBtn)!!.setOnClickListener {
-
-            val intent = Intent(this, BoardEditActivity::class.java)
-            intent.putExtra("key", key)
-            startActivity(intent)
-        }
-        alertDialog.findViewById<Button>(R.id.removeBtn)!!.setOnClickListener {
-            FBRef.boardRef.child(key).removeValue()
-            finish()
-        }
+    private fun editBoardData(key: String) {
+        FBRef.boardRef
+            .child(key)
+            .setValue(BoardModel(binding.titleArea.text.toString(), binding.contentArea.text.toString(),
+                writerUid, FBAuth.getTime()))
     }
 
     private fun getBoardData(key : String) {
@@ -82,9 +54,9 @@ class BoardInsideActivity : AppCompatActivity() {
 
                     val dataModel = dataSnapshot.getValue(BoardModel::class.java)
 
-                    binding.titleArea.text = dataModel!!.title
-                    binding.timeArea.text = dataModel.time
-                    binding.contentArea.text = dataModel.content
+                    binding.titleArea.setText(dataModel!!.title)
+                    binding.contentArea.setText(dataModel!!.content)
+                    writerUid = dataModel.uid
 
                 } catch (e : Exception) {
                     Log.d(TAG, "삭제완료")
@@ -102,7 +74,7 @@ class BoardInsideActivity : AppCompatActivity() {
         val storageReference = Firebase.storage.reference.child(key + ".png")
 
 // ImageView in your Activity
-        val imageView = binding.getImageArea
+        val imageView = binding.imageArea
 
 // Download directly from StorageReference using Glide
 // (See MyAppGlideModule for Loader registration)
