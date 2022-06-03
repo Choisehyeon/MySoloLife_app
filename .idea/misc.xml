@@ -17,6 +17,7 @@
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.2520833333333333" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.165" />
         <entry key="app/src/main/res/layout/board_lv_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/comment_lv_item.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/contents_rv_item.xml" value="0.24791666666666667" />
         <entry key="app/src/main/res/layout/custom_dialog.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_bookmark.xml" value="0.25" />
