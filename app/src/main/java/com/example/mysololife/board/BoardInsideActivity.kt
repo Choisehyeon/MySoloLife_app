@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import com.example.mysololife.R
@@ -86,6 +87,13 @@ class BoardInsideActivity : AppCompatActivity() {
                     binding.timeArea.text = dataModel.time
                     binding.contentArea.text = dataModel.content
 
+                    val myUid = FBAuth.getUid()
+                    val writerUid = dataModel.uid
+
+                    if (myUid.equals(writerUid)) {
+                        binding.boardSettingIcon.isVisible = true
+                    } else {
+                    }
                 } catch (e : Exception) {
                     Log.d(TAG, "삭제완료")
                 }
